@@ -25,15 +25,37 @@ const GET_TODOS = gql`
 
 function TodoSection() {
   const [value, setValue] = useState("")
+  const [isCompletedShow, setIsCompletedShow] = useState(false)
   const { data: listData } = useQuery(GET_TODOS, {
     context: { clientName: "todoEndpoint" },
   })
-  const [addTodo, { data: addData, loading, error }] = useMutation(ADD_TODO, {
+  const [addTodo, { loading, error }] = useMutation(ADD_TODO, {
     context: { clientName: "todoEndpoint" },
-    refetchQueries: [
-      GET_TODOS, // DocumentNode object parsed with gql
-      "getTodos", // Query name
-    ],
+    // Refetch the data, get response from server
+    // refetchQueries: [
+    //   GET_TODOS, // DocumentNode object parsed with gql
+    //   "getTodos", // Query name
+    // ],
+    update(cache, { data: { addTodo } }) {
+      // Change the cache data, It on;y rerender when the data is different from the response of server
+      cache.modify({
+        fields: {
+          todos(existingTodos = []) {
+            const newTodoRef = cache.writeFragment({
+              data: addTodo,
+              fragment: gql`
+                fragment NewTodo on Todo {
+                  id
+                  type
+                }
+              `,
+            })
+            return [...existingTodos, newTodoRef]
+          },
+        },
+      })
+    },
+    onCompleted: (addData) => completeAddTodo(addData),
   })
 
   // operations
@@ -41,8 +63,17 @@ function TodoSection() {
     e.preventDefault()
     addTodo({
       variables: { type: value },
-      context: { clientName: "todoEndpoint" },
     })
+  }
+
+  const changeInputValue = (e) => {
+    if (isCompletedShow) setIsCompletedShow(false)
+    setValue(e.target.value)
+  }
+
+  const completeAddTodo = (addData) => {
+    console.log(addData, "completeAddTodo!!")
+    setIsCompletedShow(true)
   }
 
   if (loading) return <LoadingSection />
@@ -67,10 +98,10 @@ function TodoSection() {
           name="todo"
           id="todo_input"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={changeInputValue}
         />
         <button type="submit">Submit</button>
-        {addData && <h1>Upload Completed</h1>}
+        {isCompletedShow && <h1>Upload Completed</h1>}
       </form>
     </div>
   )

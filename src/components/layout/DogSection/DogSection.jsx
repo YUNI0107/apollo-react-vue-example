@@ -71,8 +71,8 @@ function DogSection() {
 
       <hr />
 
-      <button>Get Dog Photo!!</button>
-      <button onClick={refetchDog}>Refetch</button>
+      <button>Get Selected Dog Photo!!</button>
+      <button onClick={refetchDog}>Refetch Dalmatian</button>
     </div>
   )
 }
