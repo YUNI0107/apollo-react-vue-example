@@ -3,6 +3,7 @@
     <BasicSectionPractice />
     <QuerySectionPractice />
     <MutationsSectionPractice />
+    <SubscriptionSection />
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import BasicSectionPractice from "./components/BasicSectionPractice.vue"
 import QuerySectionPractice from "./components/QuerySectionPractice.vue"
 import MutationsSectionPractice from "./components/MutationsSectionPractice.vue"
+import SubscriptionSection from "./components/SubscriptionSection.vue"
 
 export default {
   name: "app",
@@ -18,6 +20,7 @@ export default {
     BasicSectionPractice,
     QuerySectionPractice,
     MutationsSectionPractice,
+    SubscriptionSection,
   },
 }
 </script>
