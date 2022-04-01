@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Basic Section</h1>
+    <h1 class="green-text">Basic Section</h1>
     <div>
       <h1>Query</h1>
       <h2>Local {{ name }}</h2>

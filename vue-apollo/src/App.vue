@@ -4,6 +4,9 @@
     <QuerySectionPractice />
     <MutationsSectionPractice />
     <SubscriptionSection />
+
+    <hr />
+    <ApolloQuerySection />
   </div>
 </template>
 
@@ -13,6 +16,7 @@ import BasicSectionPractice from "./components/BasicSectionPractice.vue"
 import QuerySectionPractice from "./components/QuerySectionPractice.vue"
 import MutationsSectionPractice from "./components/MutationsSectionPractice.vue"
 import SubscriptionSection from "./components/SubscriptionSection.vue"
+import ApolloQuerySection from "./components/ApolloComponents/ApolloQuerySection.vue"
 
 export default {
   name: "app",
@@ -21,12 +25,13 @@ export default {
     QuerySectionPractice,
     MutationsSectionPractice,
     SubscriptionSection,
+    ApolloQuerySection,
   },
 }
 </script>
 
 <style>
-.title {
+.green-text {
   color: #2ecc8f;
 }
 

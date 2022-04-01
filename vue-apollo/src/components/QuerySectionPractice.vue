@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Query Section</h1>
+    <h1 class="green-text">Query Section</h1>
 
     <div>
       <h1>Name matching</h1>

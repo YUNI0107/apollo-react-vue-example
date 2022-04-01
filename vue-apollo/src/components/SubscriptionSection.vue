@@ -3,7 +3,11 @@
     <h1 class="title">Subscription Section</h1>
 
     <div>
-      {{ messages }}
+      <div v-for="message in messages" :key="message.id">
+        <p>
+          {{ message.text }} <span class="green-text">{{ message.id }}</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>
